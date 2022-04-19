@@ -1,0 +1,39 @@
+<form method="POST" action="/novorgb">
+    <h1>Preecha os campos abaixo</h1>
+    <h2>Nos valores RGB preencher de 0 a 255</h2>
+    
+    <label for="formato">Formato: </label>
+    <select name="formato" id="formato">
+        <option value="html">HTML</option>
+        <option value="txt">TXT</option>
+    </select>
+    <br>
+    <label for="red">RED: </label>
+    <input type="text" name="red" id="red"/>
+    <br>
+    <label for="green">GREEN: </label>
+    <input type="text" name="green" id="green"/>
+    <br>
+    <label for="blue">BLUE: </label>
+    <input type="text" name="blue" id="blue"/>
+    <br>
+    <label for="frase">FRASE: </label>
+    <input type="text" name="frase" id="frase"/>
+    <br><br>
+    <button type="submit">EXECUTAR</button>
+</form>
+
+{{#each errors}}
+    <div>
+        {{text}}
+    </div>
+{{/each}}
+
+{{#each success}}
+    <div>
+        {{text}}
+    </div>
+    <div>
+        {{{frase}}}
+    </div>
+{{/each}}

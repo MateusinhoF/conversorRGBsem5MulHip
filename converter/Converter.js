@@ -28,9 +28,7 @@ module.exports = class Converter{
     createFile(){
         this.createHex();
         this.text = `<p style="color:`+this.hexa+`">`+this.frase+`</p>`;
-        
         this.createHTML();
-       
     }
 
 }

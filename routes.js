@@ -4,6 +4,7 @@ const Converter = require('./converter/Converter');
 const Verificator = require('./verify/Verificator');
 
 let errors = [];
+let success = [];
 
 router.get('/', function(req,res){
     
@@ -15,23 +16,22 @@ router.use(function(req,res,next){
     const verify = new Verificator(req.body);
     verify.verify();
     errors = verify.errors;
-    if (errors){
+    /*if (errors){
         res.render('forms',{errors: errors});
-    }else{
-        next();
-    }
+    }*/
+    next();
+    
 });
 
 router.post('/novorgb', function(req,res){
     
-    console.log('teste')
-    const converter = new Converter(req.body);
-    var success = [];
-    converter.createFile();
-    success.push({text:'Arquivo criado com sucesso'});
-    success.push({frase:converter.text})
-    res.render('forms',{success: success});
-
+    if (errors.length === 0){
+        const converter = new Converter(req.body);
+        converter.createFile();
+        success.push({text:'Arquivo criado com sucesso'});
+        success.push({frase:converter.text});
+    }
+    res.render('forms',{ success: success, errors: errors });
         
 });
 

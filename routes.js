@@ -16,9 +16,6 @@ router.use(function(req,res,next){
     const verify = new Verificator(req.body);
     verify.verify();
     errors = verify.errors;
-    /*if (errors){
-        res.render('forms',{errors: errors});
-    }*/
     next();
     
 });

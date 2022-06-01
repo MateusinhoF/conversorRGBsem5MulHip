@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Conversor = require('./converter');
+const Converter = require('./converter/Converter');
+const Verificator = require('./verify/Verificator');
+
+let errors = [];
 
 router.get('/', function(req,res){
     
@@ -8,10 +11,20 @@ router.get('/', function(req,res){
     
 });
 
+router.use(function(req,res,next){
+    const verify = new Verificator(req.body);
+    verify.verify();
+    errors = verify.errors;
+    if (errors){
+        res.render('forms',{errors: errors});
+    }
+    next();
+});
+
 router.post('/novorgb', function(req,res){
     
-    var errors = [];
-
+    
+/*
     if(req.body.red == '' || req.body.red < 0 || req.body.red > 255 || isNaN(parseInt(req.body.red))){
         errors.push({text: "Valor inválido no RED"});
     }
@@ -27,14 +40,14 @@ router.post('/novorgb', function(req,res){
 
     if(errors.length>0){
         res.render('forms',{errors: errors});
-    }else{
-        const conversor = new Conversor(req.body);
+    }else{*/
+        const converter = new Converter(req.body);
         var success = [];
-        conversor.createFile();
+        converter.createFile();
         success.push({text:'Arquivo criado com sucesso'});
-        success.push({frase:conversor.text})
+        success.push({frase:converter.text})
         res.render('forms',{success: success});
-    }
+    //}
         
 });
 

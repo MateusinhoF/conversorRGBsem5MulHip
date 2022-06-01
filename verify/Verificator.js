@@ -25,8 +25,8 @@ module.exports = class Verificator{
     }
 
     verifyPhrase(){
-        if(this.bodyReq.frase == ''){
-            this.errors.push({text: "Digite um valor na frase"});
+        if(this.bodyReq.frase == '' || this.bodyReq.frase.trim()==''){
+            this.errors.push({text: "Digite uma frase"});
         }
     }
 

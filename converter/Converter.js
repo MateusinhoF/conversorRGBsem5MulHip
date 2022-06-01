@@ -18,15 +18,8 @@ module.exports = class Converter{
 
     createHTML(){
         const fs = require('fs');
+        //cria o arquivo e baixa ele na pasta onde esta localizado o codigo
         fs.writeFile('frase.html',this.text,(err) => {
-            if (err) throw err;
-            console.log('arquivo criado');
-        });
-    }
-    
-    createTXT(){
-        const fs = require('fs');
-        fs.writeFile('frase.txt',this.text,(err) => {
             if (err) throw err;
             console.log('arquivo criado');
         });
@@ -35,12 +28,9 @@ module.exports = class Converter{
     createFile(){
         this.createHex();
         this.text = `<p style="color:`+this.hexa+`">`+this.frase+`</p>`;
-        if(this.formato=='html'){
-            this.createHTML();
-        }
-        if(this.formato=='txt'){
-            this.createTXT();
-        }
+        
+        this.createHTML();
+       
     }
 
 }
